@@ -1,24 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BirthDate } from './components/BirthDate/BirthDate';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <nav>
+        <p>Hello there</p>
+        <p>here are some usless pickers </p>
+      </nav>
+      <div className='container'>
+        <BirthDate startDate={new Date('1950-01-01') } endDate={new Date()}/>
+      </div>
     </div>
   );
 }
