@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './App.css';
-import { BirthDate } from './components/BirthDate/BirthDate';
+// import {BirthDate } from './components/BirthDate/BirthDate';
+
+
+const BirthDate = React.lazy(() => import('./components/BirthDate/BirthDate'));
+const PhoneNumer = React.lazy(() => import('./components/PhoneNumer/PhoneNumber'));
 
 function App() {
   return (
@@ -10,7 +14,13 @@ function App() {
         <p>here are some usless pickers </p>
       </nav>
       <div className='container'>
-        <BirthDate startDate={new Date('1950-01-01') } endDate={new Date()}/>
+        <Suspense fallback={<div>Loading...</div>}>
+          <BirthDate startDate={new Date('1970-01-01')} endDate={new Date()} />
+
+        </Suspense>
+        {/* <Suspense fallback={<div>Loading...</div>}> */}
+          <PhoneNumer />
+        {/* </Suspense> */}
       </div>
     </div>
   );

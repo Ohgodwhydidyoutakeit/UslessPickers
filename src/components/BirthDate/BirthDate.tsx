@@ -1,32 +1,30 @@
 import { FC, useEffect, useState } from "react";
-
-
-
 interface IBirthDateProps {
     startDate: Date
     endDate: Date
 }
-export const BirthDate: FC<IBirthDateProps> = ({ startDate, endDate }) => {
-    const [dates, setDates] = useState<Date[]>([])
-    useEffect(() => {
-        const date = new Date(startDate.getTime());
 
-        while (date <= endDate) {
-            // dates.push(new Date(date));
-            setDates((_prevDates: Date[]) => {
-                return [..._prevDates, new Date(date)];
-            })
-            date.setDate(date.getDate() + 1);
-        }
-        console.log(dates)
-    }, [dates])
+const returnArrayOfDates = ({ startDate, endDate }: IBirthDateProps): Date[] => {
+    let dates: Date[] = []
+    //to avoid modifying the original date
+    const theDate = new Date(startDate)
+    while (theDate < endDate) {
+        dates = [...dates, new Date(theDate)]
+        theDate.setDate(theDate.getDate() + 1)
+    }
+    return dates
+}
+
+const BirthDate: FC<IBirthDateProps> = ({ startDate, endDate }) => {
+
+
+    const dates = returnArrayOfDates({ startDate, endDate }) || null
 
     return (
-
         < div >
             <div>Select your birthdate</div>
-            <div> <select>{dates.map((data: Date) => {
-                return <option> a</option>
+            <div> <select>{dates.map((data: Date, index: number) => {
+                return <option key={index}> {data.toDateString()}</option>
             })}</select></div>
         </div >
 
@@ -35,3 +33,5 @@ export const BirthDate: FC<IBirthDateProps> = ({ startDate, endDate }) => {
 
 
 }
+
+export default BirthDate
